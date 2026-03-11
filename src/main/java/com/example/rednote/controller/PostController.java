@@ -36,4 +36,11 @@ public class PostController {
     public Result<PostPO> getPost(@PathVariable Integer postId) {
         return Result.success(postService.getById(postId));
     }
+
+    @DeleteMapping("/{postId}")
+    @Operation(summary = "删除帖子", description = "根据帖子ID删除指定帖子")
+    public Result<?> delete(@PathVariable Integer postId) {
+        postService.removeById(postId);
+        return Result.success();
+    }
 }
