@@ -2,11 +2,14 @@ package com.example.rednote.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.core.toolkit.BeanUtils;
 import com.example.rednote.common.response.Result;
+import com.example.rednote.model.dto.UserDTO;
 import com.example.rednote.model.vo.UserVO;
 import com.example.rednote.service.UserService;
 
@@ -28,5 +31,15 @@ public class UserController {
     @Operation(summary = "获取用户详情", description = "根据用户ID返回详细信息")
     public Result<UserVO> getById(@PathVariable Integer userId) {
         return Result.success(userService.getById(userId));
+    }
+
+    @PostMapping("/register")
+    @Operation(summary = "用户注册", description = "创建新用户账户")
+    public Result<?> register(@RequestBody UserDTO userDto) {
+        if (userService.register(userDto) == 1) {
+            return Result.success();
+        } else {
+            return Result.fail("注册失败");
+        }
     }
 }
