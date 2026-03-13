@@ -23,4 +23,10 @@ import lombok.extern.slf4j.Slf4j;
 public class UserController {
 
     private final UserService userService;
+
+    @GetMapping("/{userId}")
+    @Operation(summary = "获取用户详情", description = "根据用户ID返回详细信息")
+    public Result<UserVO> getById(@PathVariable Integer userId) {
+        return Result.success(userService.getById(userId));
+    }
 }
