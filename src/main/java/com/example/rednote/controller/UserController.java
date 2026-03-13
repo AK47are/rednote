@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.baomidou.mybatisplus.core.toolkit.BeanUtils;
 import com.example.rednote.common.response.Result;
+import com.example.rednote.model.dto.LoginDTO;
 import com.example.rednote.model.dto.UserDTO;
 import com.example.rednote.model.vo.UserVO;
 import com.example.rednote.service.UserService;
@@ -41,5 +41,11 @@ public class UserController {
         } else {
             return Result.fail("注册失败");
         }
+    }
+
+    @PostMapping("/login")
+    @Operation(summary = "用户登录", description = "登录用户账号")
+    public Result<String> login(@RequestBody LoginDTO loginDTO) {
+        return Result.success(userService.login(loginDTO));
     }
 }

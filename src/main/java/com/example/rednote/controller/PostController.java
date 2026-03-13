@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.rednote.common.response.Result;
 import com.example.rednote.model.po.PostPO;
-import com.example.rednote.model.vo.PostVO;
 import com.example.rednote.service.PostService;
 
 import io.swagger.v3.oas.annotations.Operation;
