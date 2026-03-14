@@ -1,5 +1,8 @@
 package com.example.rednote.service.impl;
 
+import java.rmi.registry.Registry;
+import java.util.Objects;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +12,7 @@ import com.example.rednote.mapper.UserMapper;
 import com.example.rednote.model.dto.LoginDTO;
 import com.example.rednote.model.dto.UserDTO;
 import com.example.rednote.model.exception.LoginFailedException;
+import com.example.rednote.model.exception.RegisterFailedException;
 import com.example.rednote.model.po.UserPO;
 import com.example.rednote.model.vo.UserVO;
 import com.example.rednote.service.UserService;
@@ -33,10 +37,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer register(UserDTO userDTO) {
         userDTO.setUserId(null);
-        userDTO.setPassword(BCrypt.hashpw(userDTO.getPassword()));
         UserPO userPO = new UserPO();
-        BeanUtils.copyProperties(userDTO, userPO);
-        return userMapper.insert(userPO);
+
+        // 检查 username 是否已经存在
+        QueryWrapper<UserPO> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username", userDTO.getUsername());
+        if (Objects.nonNull(userMapper.selectOne(queryWrapper)))
+            throw new RegisterFailedException("用户名已经存在");
+        else {
+            userPO.setPassword(BCrypt.hashpw(userDTO.getPassword()));
+            userPO.setUsername(userDTO.getUsername());
+            return userMapper.insert(userPO);
+        }
     }
 
     @Override
