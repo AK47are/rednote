@@ -21,18 +21,4 @@ public class GlobalExceptionHandler {
         log.error("异常信息：{}", e.getMessage());
         return ResponseEntity.status(HttpStatus.HTTP_INTERNAL_ERROR).body(Result.fail(e.getMessage()));
     }
-
-    // 单独处理用户名重复的异常
-    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
-    public ResponseEntity<Result<?>> exceptionHandler(SQLIntegrityConstraintViolationException e) {
-        String message = e.getMessage();
-        if (message.contains("Duplicate entry")) {
-            String username = message.split(" ")[2];
-            log.error("异常信息：{} 已存在", e.getMessage());
-            return ResponseEntity.status(HttpStatus.HTTP_CONFLICT).body(Result.fail(username + " 已存在"));
-        } else {
-            log.error("异常信息：{}", e.getMessage());
-            return ResponseEntity.status(HttpStatus.HTTP_CONFLICT).body(Result.fail(e.getMessage()));
-        }
-    }
 }
