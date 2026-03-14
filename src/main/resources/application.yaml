@@ -31,6 +31,7 @@ springdoc:
     - group: "仿小红书项目接口文档"
       paths-to-match: "/**"
       packages-to-scan: com.example.rednote.controller
+  override-with-generic-response: false
 
 knife4j:
   enable: true
