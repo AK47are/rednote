@@ -10,5 +10,5 @@ public class LoginDTO {
     @Schema(description = "用户名", requiredMode = RequiredMode.REQUIRED)
     String username;
     @Schema(description = "密码", requiredMode = RequiredMode.REQUIRED)
-    String passward;
+    String password;
 }

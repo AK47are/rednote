@@ -1,6 +1,5 @@
 package com.example.rednote.service.impl;
 
-import java.rmi.registry.Registry;
 import java.util.Objects;
 
 import org.springframework.beans.BeanUtils;
@@ -56,7 +55,7 @@ public class UserServiceImpl implements UserService {
         QueryWrapper<UserPO> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username", loginDTO.getUsername());
         UserPO userPO = userMapper.selectOne(queryWrapper);
-        if (BCrypt.checkpw(loginDTO.getPassward(), userPO.getPassword())) {
+        if (BCrypt.checkpw(loginDTO.getPassword(), userPO.getPassword())) {
             return jwtUtils.generateToken(Integer.toString(userPO.getUserId()), userPO.getUsername());
         } else {
             throw new LoginFailedException("用户名或密码错误");
