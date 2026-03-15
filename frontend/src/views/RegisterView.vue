@@ -60,7 +60,7 @@ export default {
         if (valid) {
           await registerApi(this.form)
           ElMessage.success('注册成功，即将跳转登录...')
-          // this.$router.push('/login')
+          this.$router.push('/login')
         }
       } catch (e) {
         ElMessage.error(e.response?.data?.msg || '注册失败，请稍后重试')
