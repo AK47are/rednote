@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
         QueryWrapper<UserPO> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username", loginDTO.getUsername());
         UserPO userPO = userMapper.selectOne(queryWrapper);
-        if (BCrypt.checkpw(loginDTO.getPassword(), userPO.getPassword())) {
+        if (Objects.nonNull(userPO) && BCrypt.checkpw(loginDTO.getPassword(), userPO.getPassword())) {
             return jwtUtils.generateToken(Integer.toString(userPO.getUserId()), userPO.getUsername());
         } else {
             throw new LoginFailedException("用户名或密码错误");
