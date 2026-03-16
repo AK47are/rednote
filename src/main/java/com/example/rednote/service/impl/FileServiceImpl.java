@@ -25,7 +25,7 @@ public class FileServiceImpl implements FileService {
     private final MinioProperties minioProperties;
 
     @Override
-    public String updateFile(MultipartFile file) throws Exception {
+    public String uploadFile(MultipartFile file) throws Exception {
         String objectName = UUID.randomUUID() + "_" + file.getOriginalFilename();
         minioClient.putObject(
                 PutObjectArgs.builder()
