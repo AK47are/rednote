@@ -11,17 +11,17 @@ INSERT INTO `user` (`user_id`, `username`, `password`, `avatar`) VALUES
   (10, 'user10', '$2a$10$EX5sCECRxuYHRpLH4bxMIuklDbX55vmFUKEZSyqDEpS0F3zpYGD/y', '默认头像.png');
 
 -- 2. 插入10条用户详情
-INSERT INTO `user_details` (`user_id`, `phone`, `email`, `nickname`, `gender`, `bio`, `follow_count`, `fans_count`, `post_count`, `like_receive_count`, `status`) VALUES
-  (1, '13800000001', 'user1@example.com', '用户1', 1, '这是用户1的简介', 0, 0, 0, 0, 1),
-  (2, '13800000002', 'user2@example.com', '用户2', 2, '这是用户2的简介', 0, 0, 0, 0, 1),
-  (3, '13800000003', 'user3@example.com', '用户3', 0, '这是用户3的简介', 0, 0, 0, 0, 1),
-  (4, '13800000004', 'user4@example.com', '用户4', 1, '这是用户4的简介', 0, 0, 0, 0, 1),
-  (5, '13800000005', 'user5@example.com', '用户5', 2, '这是用户5的简介', 0, 0, 0, 0, 1),
-  (6, '13800000006', 'user6@example.com', '用户6', 1, '这是用户6的简介', 0, 0, 0, 0, 1),
-  (7, '13800000007', 'user7@example.com', '用户7', 0, '这是用户7的简介', 0, 0, 0, 0, 1),
-  (8, '13800000008', 'user8@example.com', '用户8', 2, '这是用户8的简介', 0, 0, 0, 0, 1),
-  (9, '13800000009', 'user9@example.com', '用户9', 1, '这是用户9的简介', 0, 0, 0, 0, 1),
-  (10, '13800000010', 'user10@example.com', '用户10', 1, '这是用户10的简介', 0, 0, 0, 0, 1);
+INSERT INTO `user_details` (`user_id`, `phone`, `email`, `gender`, `bio`, `follow_count`, `fans_count`, `post_count`, `like_receive_count`, `status`) VALUES
+  (1, '13800000001', 'user1@example.com', 1, '这是用户1的简介', 0, 0, 0, 0, 1),
+  (2, '13800000002', 'user2@example.com', 2, '这是用户2的简介', 0, 0, 0, 0, 1),
+  (3, '13800000003', 'user3@example.com', 0, '这是用户3的简介', 0, 0, 0, 0, 1),
+  (4, '13800000004', 'user4@example.com', 1, '这是用户4的简介', 0, 0, 0, 0, 1),
+  (5, '13800000005', 'user5@example.com', 2, '这是用户5的简介', 0, 0, 0, 0, 1),
+  (6, '13800000006', 'user6@example.com', 1, '这是用户6的简介', 0, 0, 0, 0, 1),
+  (7, '13800000007', 'user7@example.com', 0, '这是用户7的简介', 0, 0, 0, 0, 1),
+  (8, '13800000008', 'user8@example.com', 2, '这是用户8的简介', 0, 0, 0, 0, 1),
+  (9, '13800000009', 'user9@example.com', 1, '这是用户9的简介', 0, 0, 0, 0, 1),
+  (10, '13800000010', 'user10@example.com', 1, '这是用户10的简介', 0, 0, 0, 0, 1);
 
 -- 3. 插入3个话题
 INSERT INTO `topic` (`topic_id`, `topic_name`, `topic_description`, `topic_icon`, `cover`, `post_count`, `follow_count`, `is_hot`) VALUES
@@ -44,7 +44,7 @@ INSERT INTO `post` (`post_id`, `user_id`, `title`, `content`, `cover_image`) VAL
   (11, 4, '美食帖1：火锅攻略', '本地最好吃的火锅店推荐...', '测试用的帖子封面.jpg'),
   (12, 4, '美食帖2：甜品制作', '在家自制提拉米苏...', '测试用的帖子封面.jpg'),
   (13, 5, '美食帖3：烧烤指南', '户外烧烤必备清单...', '测试用的帖子封面.jpg'),
-  (14, 5, '美食帖4：咖啡文化', '不同咖啡豆的风味区别...,'),
+  (14, 5, '美食帖4：咖啡文化', '不同咖啡豆的风味区别...,', '测试用的帖子封面.jpg'),
   (15, 5, '美食帖5：素食餐厅', '几家不错的素食餐厅...', '测试用的帖子封面.jpg'),
   (16, 6, '美食帖6：街头小吃', '隐藏在小巷里的美味...', '测试用的帖子封面.jpg'),
   (17, 6, '美食帖7：烘焙入门', '新手烘焙工具推荐...', '测试用的帖子封面.jpg'),
