@@ -1,4 +1,4 @@
-INSERT INTO `user` (`user_id`, `username`, `password`, `avatar`) VALUES
+INSERT IGNORE INTO `user` (`user_id`, `username`, `password`, `avatar`) VALUES
   (1, 'user1', '$2a$10$EX5sCECRxuYHRpLH4bxMIuklDbX55vmFUKEZSyqDEpS0F3zpYGD/y', '默认头像.png'),
   (2, 'user2', '$2a$10$EX5sCECRxuYHRpLH4bxMIuklDbX55vmFUKEZSyqDEpS0F3zpYGD/y', '默认头像.png'),
   (3, 'user3', '$2a$10$EX5sCECRxuYHRpLH4bxMIuklDbX55vmFUKEZSyqDEpS0F3zpYGD/y', '默认头像.png'),
@@ -11,7 +11,7 @@ INSERT INTO `user` (`user_id`, `username`, `password`, `avatar`) VALUES
   (10, 'user10', '$2a$10$EX5sCECRxuYHRpLH4bxMIuklDbX55vmFUKEZSyqDEpS0F3zpYGD/y', '默认头像.png');
 
 -- 2. 插入10条用户详情
-INSERT INTO `user_details` (`user_id`, `phone`, `email`, `gender`, `bio`, `follow_count`, `fans_count`, `post_count`, `like_receive_count`, `status`) VALUES
+INSERT IGNORE INTO `user_details` (`user_id`, `phone`, `email`, `gender`, `bio`, `follow_count`, `fans_count`, `post_count`, `like_receive_count`, `status`) VALUES
   (1, '13800000001', 'user1@example.com', 1, '这是用户1的简介', 0, 0, 0, 0, 1),
   (2, '13800000002', 'user2@example.com', 2, '这是用户2的简介', 0, 0, 0, 0, 1),
   (3, '13800000003', 'user3@example.com', 0, '这是用户3的简介', 0, 0, 0, 0, 1),
@@ -24,13 +24,13 @@ INSERT INTO `user_details` (`user_id`, `phone`, `email`, `gender`, `bio`, `follo
   (10, '13800000010', 'user10@example.com', 1, '这是用户10的简介', 0, 0, 0, 0, 1);
 
 -- 3. 插入3个话题
-INSERT INTO `topic` (`topic_id`, `topic_name`, `topic_description`, `topic_icon`, `cover`, `post_count`, `follow_count`, `is_hot`) VALUES
+INSERT IGNORE INTO `topic` (`topic_id`, `topic_name`, `topic_description`, `topic_icon`, `cover`, `post_count`, `follow_count`, `is_hot`) VALUES
   (1, '科技', '讨论最新科技动态', '测试用的话题图标.jpg', '测试用的话题封面.jpg', 0, 0, 1),
   (2, '美食', '分享美食探店与制作', '测试用的话题图标.jpg', '测试用的话题封面.jpg', 0, 0, 1),
   (3, '旅行', '记录旅途风景与攻略', '测试用的话题图标.jpg', '测试用的话题封面.jpg', 0, 0, 0);
 
 -- 4. 插入30个帖子 (post_id 1 ~ 30)
-INSERT INTO `post` (`post_id`, `user_id`, `title`, `content`, `cover_image`) VALUES
+INSERT IGNORE INTO `post` (`post_id`, `user_id`, `title`, `content`, `cover_image`) VALUES
   (1, 1, '科技帖1：AI最新进展', '人工智能领域又有了新突破...', '测试用的帖子封面.jpg'),
   (2, 1, '科技帖2：量子计算入门', '量子计算的基本原理介绍...', '测试用的帖子封面.jpg'),
   (3, 1, '科技帖3：5G未来展望', '5G技术将如何改变生活...', '测试用的帖子封面.jpg'),
@@ -63,7 +63,7 @@ INSERT INTO `post` (`post_id`, `user_id`, `title`, `content`, `cover_image`) VAL
   (30, 10, '旅行帖10：摄影技巧', '旅行拍照的构图技巧...', '测试用的帖子封面.jpg');
 
 -- 5. 插入30条帖子详情
-INSERT INTO `post_details` (`post_id`, `type`, `topic_ids`, `view_count`, `like_count`, `comment_count`, `collect_count`) VALUES
+INSERT IGNORE INTO `post_details` (`post_id`, `type`, `topic_ids`, `view_count`, `like_count`, `comment_count`, `collect_count`) VALUES
   (1, 3, '1', 0, 0, 0, 0), (2, 3, '1', 0, 0, 0, 0),
   (3, 3, '1', 0, 0, 0, 0), (4, 3, '1', 0, 0, 0, 0),
   (5, 3, '1', 0, 0, 0, 0), (6, 3, '1', 0, 0, 0, 0),
@@ -81,7 +81,7 @@ INSERT INTO `post_details` (`post_id`, `type`, `topic_ids`, `view_count`, `like_
   (29, 3, '3', 0, 0, 0, 0), (30, 3, '3', 0, 0, 0, 0);
 
 -- 6. 插入30张帖子图片 (每个帖子1张)
-INSERT INTO `post_image` (`post_id`, `url`) VALUES
+INSERT IGNORE INTO `post_image` (`post_id`, `url`) VALUES
   (1, '测试用的帖子内照片.png'), (2, '测试用的帖子内照片.png'),
   (3, '测试用的帖子内照片.png'), (4, '测试用的帖子内照片.png'),
   (5, '测试用的帖子内照片.png'), (6, '测试用的帖子内照片.png'),
@@ -99,7 +99,7 @@ INSERT INTO `post_image` (`post_id`, `url`) VALUES
   (29, '测试用的帖子内照片.png'), (30, '测试用的帖子内照片.png');
 
 -- 7. 插入帖子-话题关联：前10个帖子对应话题1，中间10个对应话题2，最后10个对应话题3
-INSERT INTO `post_topic` (`post_id`, `topic_id`) VALUES
+INSERT IGNORE INTO `post_topic` (`post_id`, `topic_id`) VALUES
   (1, 1), (2, 1), (3, 1), (4, 1), (5, 1),
   (6, 1), (7, 1), (8, 1), (9, 1), (10, 1),
   (11, 2), (12, 2), (13, 2), (14, 2), (15, 2),
@@ -108,7 +108,7 @@ INSERT INTO `post_topic` (`post_id`, `topic_id`) VALUES
   (26, 3), (27, 3), (28, 3), (29, 3), (30, 3);
 
 -- 8. 插入评论 (每个帖子2条，共60条)
-INSERT INTO `comment` (`post_id`, `user_id`, `content`) VALUES
+INSERT IGNORE INTO `comment` (`post_id`, `user_id`, `content`) VALUES
   (1, 2, '这篇文章很有启发！'), (1, 3, '感谢分享，学习了。'),
   (2, 4, '量子计算真的神奇'), (2, 5, '期待后续内容'),
   (3, 6, '5G未来可期'), (3, 7, '分析得很透彻'),
@@ -141,7 +141,7 @@ INSERT INTO `comment` (`post_id`, `user_id`, `content`) VALUES
   (30, 10, '摄影技巧很受用'), (30, 1, '学到了');
 
 -- 9. 插入关注关系 (每个用户随机关注3~5个其他用户，共约45条)
-INSERT INTO `follow` (`follower_id`, `following_id`) VALUES
+INSERT IGNORE INTO `follow` (`follower_id`, `following_id`) VALUES
   (1, 2), (1, 3), (1, 4), (1, 5),
   (2, 1), (2, 3), (2, 6), (2, 7),
   (3, 4), (3, 5), (3, 8), (3, 9),
@@ -154,7 +154,7 @@ INSERT INTO `follow` (`follower_id`, `following_id`) VALUES
   (10, 2), (10, 3), (10, 6), (10, 7),
   (1, 6), (2, 8), (3, 10), (4, 7), (5, 9);
 
-INSERT INTO `like` (`user_id`, `post_id`) VALUES
+INSERT IGNORE INTO `like` (`user_id`, `post_id`) VALUES
   (1, 3), (2, 7), (3, 12), (4, 5), (5, 19),
   (6, 8), (7, 14), (8, 2), (9, 11), (10, 17),
   (1, 20), (2, 9), (3, 4), (4, 15), (5, 6),
