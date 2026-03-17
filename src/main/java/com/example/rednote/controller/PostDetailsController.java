@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/postsDetails")
+@RequestMapping("/posts/details")
 @Tag(name = "帖子详情接口", description = "帖子详情相关接口")
 @AllArgsConstructor
 public class PostDetailsController {
