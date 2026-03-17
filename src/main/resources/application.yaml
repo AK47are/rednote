@@ -2,6 +2,12 @@ spring:
   application:
     name: rednote
 
+  sql:
+    init:
+      mode: always
+      # 不配置这个会导致写入的数据乱码
+      encoding: UTF-8
+
   datasource:
     url: jdbc:mysql://localhost:3306/rednote?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
