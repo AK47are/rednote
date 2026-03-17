@@ -8,6 +8,13 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: Layout,
+      children: [
+        {
+          path: '/profiles/:userId(\\d+)',
+          name: 'profiles',
+          component: () => import('@/views/ProfileView.vue'),
+        },
+      ],
     },
     {
       path: '/register',
