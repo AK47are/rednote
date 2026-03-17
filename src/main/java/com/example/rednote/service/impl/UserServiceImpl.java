@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.rednote.common.utils.JwtUtils;
+import com.example.rednote.common.utils.MinioUtils;
 import com.example.rednote.mapper.UserMapper;
 import com.example.rednote.model.dto.LoginDTO;
 import com.example.rednote.model.dto.UserDTO;
@@ -25,11 +26,13 @@ public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
     private final JwtUtils jwtUtils;
+    private final MinioUtils minioUtils;
 
     @Override
     public UserVO getById(Integer userId) {
         UserVO userVO = new UserVO();
         BeanUtils.copyProperties(userMapper.selectById(userId), userVO);
+        userVO.setAvatar(minioUtils.getPublicUrl(userVO.getAvatar()));
         return userVO;
     }
 
