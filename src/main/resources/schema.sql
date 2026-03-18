@@ -45,7 +45,6 @@ CREATE TABLE IF NOT EXISTS `user_details` (
 CREATE TABLE IF NOT EXISTS `post_details` (
   `post_id` INTEGER UNSIGNED PRIMARY KEY COMMENT '帖子ID',
   `type` TINYINT DEFAULT 3 COMMENT '类型：1-图文 2-视频 3-纯文字',
-  `topic_ids` VARCHAR(255) COMMENT '关联话题ID，多个用逗号分隔',
   `view_count` INTEGER UNSIGNED DEFAULT 0 COMMENT '浏览量',
   `like_count` INTEGER UNSIGNED DEFAULT 0 COMMENT '点赞数',
   `comment_count` INTEGER UNSIGNED DEFAULT 0 COMMENT '评论数',
