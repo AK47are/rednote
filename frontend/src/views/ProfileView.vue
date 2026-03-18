@@ -1,13 +1,15 @@
 <template>
   <div class="profile-page">
-    <h1>个人主页</h1>
-    <p>用户ID：{{ userId }}</p>
+    <UserCard :user-id="userId" />
   </div>
 </template>
 
 <script>
+import UserCard from '@/components/UserCard.vue'
+
 export default {
   name: 'ProfileView',
+  components: { UserCard },
   computed: {
     userId() {
       return this.$route.params.userId
