@@ -37,6 +37,7 @@
 <script>
 import { loginApi } from '@/api/user'
 import { ElMessage } from 'element-plus'
+import { useUserStore } from '@/stores/user'
 
 export default {
   name: 'LoginPage',
@@ -68,6 +69,7 @@ export default {
           const res = await loginApi(this.form)
           ElMessage.success('登录成功')
           localStorage.setItem('token', res.data)
+          useUserStore().initUser()
           this.$router.push('/')
         }
       } catch (e) {

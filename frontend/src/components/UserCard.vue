@@ -59,8 +59,10 @@
 
 <script>
 import { ElMessage } from 'element-plus'
-import { getByIdApi, getDetailByIdApi, getCurrApi } from '@/api/user'
+import { getByIdApi, getDetailByIdApi } from '@/api/user'
 import { toggleFollowApi, isFollowApi } from '@/api/follow'
+import { useUserStore } from '@/stores/user'
+import { storeToRefs } from 'pinia'
 
 export default {
   name: 'UserCard',
@@ -70,9 +72,13 @@ export default {
       required: true,
     },
   },
+  setup() {
+    const userStore = useUserStore()
+    const { userId: currUserId } = storeToRefs(userStore)
+    return { currUserId }
+  },
   data() {
     return {
-      currUserId: null,
       isFollowed: false,
       followLoading: false,
       user: {
@@ -86,16 +92,6 @@ export default {
         likeReceiveCount: 0,
       },
     }
-  },
-  created() {
-    getCurrApi()
-      .then((res) => {
-        this.currUserId = res.data.userId
-        console.log('当前登录用户:', this.currUserId)
-      })
-      .catch((err) => {
-        console.error('获取当前用户失败', err)
-      })
   },
   watch: {
     userId: {
