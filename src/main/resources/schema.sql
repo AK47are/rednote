@@ -27,8 +27,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
 ) COMMENT='评论表';
 
 CREATE TABLE IF NOT EXISTS `user_details` (
-  `user_details_id` INTEGER UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '用户详情ID',
-  `user_id` INTEGER UNSIGNED NOT NULL COMMENT '用户ID',
+  `user_id` INTEGER UNSIGNED NOT NULL PRIMARY KEY COMMENT '用户ID',
   `phone` VARCHAR(11) UNIQUE COMMENT '手机号',
   `email` VARCHAR(100) UNIQUE COMMENT '邮箱',
   `gender` TINYINT DEFAULT 0 COMMENT '性别：0-未知 1-男 2-女',
@@ -44,8 +43,7 @@ CREATE TABLE IF NOT EXISTS `user_details` (
 ) COMMENT='用户详情表';
 
 CREATE TABLE IF NOT EXISTS `post_details` (
-  `post_details_id` INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT COMMENT '帖子详情ID',
-  `post_id` INTEGER UNSIGNED COMMENT '帖子ID',
+  `post_id` INTEGER UNSIGNED PRIMARY KEY COMMENT '帖子ID',
   `type` TINYINT DEFAULT 3 COMMENT '类型：1-图文 2-视频 3-纯文字',
   `topic_ids` VARCHAR(255) COMMENT '关联话题ID，多个用逗号分隔',
   `view_count` INTEGER UNSIGNED DEFAULT 0 COMMENT '浏览量',
@@ -65,15 +63,15 @@ CREATE TABLE IF NOT EXISTS`post_image` (
 ) COMMENT='帖子图片表';
 
 CREATE TABLE IF NOT EXISTS `topic` (
-   `topic_id` INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT COMMENT '话题ID',
-   `topic_name` VARCHAR(50) NOT NULL COMMENT '话题名称',
-   `topic_description` VARCHAR(200) COMMENT '话题描述',
-   `topic_icon` VARCHAR(500) COMMENT '话题图标',
-   `cover` VARCHAR(500) COMMENT '话题封面',
-   `post_count` INTEGER UNSIGNED DEFAULT 0 COMMENT '帖子数',
-   `follow_count` INTEGER UNSIGNED DEFAULT 0 COMMENT '关注数',
-   `is_hot` TINYINT DEFAULT 0 COMMENT '是否热门',
-   `create_time` DATETIME DEFAULT CURRENT_TIMESTAMP
+  `topic_id` INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT COMMENT '话题ID',
+  `topic_name` VARCHAR(50) NOT NULL COMMENT '话题名称',
+  `topic_description` VARCHAR(200) COMMENT '话题描述',
+  `topic_icon` VARCHAR(500) COMMENT '话题图标',
+  `cover` VARCHAR(500) COMMENT '话题封面',
+  `post_count` INTEGER UNSIGNED DEFAULT 0 COMMENT '帖子数',
+  `follow_count` INTEGER UNSIGNED DEFAULT 0 COMMENT '关注数',
+  `is_hot` TINYINT DEFAULT 0 COMMENT '是否热门',
+  `create_time` DATETIME DEFAULT CURRENT_TIMESTAMP
 ) COMMENT='话题表';
 
 CREATE TABLE IF NOT EXISTS `post_topic` (
