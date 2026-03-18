@@ -3,8 +3,24 @@
     <div class="avatar-wrapper">
       <el-avatar :size="140" :src="user.avatar" />
     </div>
-    <div>
-      <div class="user-name">{{ user.username || '用户不存在' }}</div>
+    <div class="info-wrapper">
+      <div class="info-header">
+        <div class="user-name">{{ user.username || '用户不存在' }}</div>
+        <div class="actions" v-if="currUserId && currUserId !== Number(userId)">
+          <el-button
+            size="large"
+            style="width: 96px"
+            :type="isFollowed ? 'default' : 'primary'"
+            :loading="followLoading"
+            round
+            @click="handleToggleFollow"
+          >
+            {{ isFollowed ? '已关注' : '关注' }}
+          </el-button>
+          <el-button size="large" icon="More" text circle />
+        </div>
+      </div>
+
       <div class="meta">
         <span>用户ID：{{ user.userId || '--' }}</span>
       </div>
@@ -44,6 +60,7 @@
 <script>
 import { ElMessage } from 'element-plus'
 import { getByIdApi, getDetailByIdApi, getCurrApi } from '@/api/user'
+import { toggleFollowApi, isFollowApi } from '@/api/follow'
 
 export default {
   name: 'UserCard',
@@ -56,6 +73,8 @@ export default {
   data() {
     return {
       currUserId: null,
+      isFollowed: false,
+      followLoading: false,
       user: {
         userId: null,
         username: '',
@@ -103,8 +122,23 @@ export default {
           fansCount: detailsRes.data.fansCount,
           likeReceiveCount: detailsRes.data.likeReceiveCount,
         }
+
+        const res = await isFollowApi(id)
+        this.isFollowed = res.data
       } catch (err) {
         ElMessage.error(err.message || '获取用户信息失败')
+      }
+    },
+    async handleToggleFollow() {
+      this.followLoading = true
+      try {
+        await toggleFollowApi(this.userId)
+        this.isFollowed = !this.isFollowed
+        this.fetchUser(this.userId)
+      } catch (err) {
+        ElMessage.error(err.message || '操作失败')
+      } finally {
+        this.followLoading = false
       }
     },
   },
@@ -116,6 +150,16 @@ export default {
   display: flex;
   align-items: center; /* 垂直居中对齐 */
   gap: 32px;
+}
+
+.info-wrapper {
+  flex: 1;
+}
+
+.info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .user-name {
