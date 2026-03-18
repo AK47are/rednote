@@ -48,4 +48,10 @@ public class UserController {
     public Result<String> login(@RequestBody LoginDTO loginDTO) {
         return Result.success(userService.login(loginDTO));
     }
+
+    @GetMapping("/current")
+    @Operation(summary = "获取当前登录用户", description = "返回当前登录用户的简略信息")
+    public Result<UserVO> getCurrentUser() {
+        return Result.success(userService.getCurrentUser());
+    }
 }

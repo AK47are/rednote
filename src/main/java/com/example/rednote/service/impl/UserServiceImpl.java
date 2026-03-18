@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.rednote.common.utils.JwtUtils;
 import com.example.rednote.common.utils.MinioUtils;
+import com.example.rednote.common.utils.ThreadLocalUtils;
 import com.example.rednote.mapper.UserMapper;
 import com.example.rednote.model.dto.LoginDTO;
 import com.example.rednote.model.dto.UserDTO;
@@ -17,6 +18,7 @@ import com.example.rednote.model.po.UserPO;
 import com.example.rednote.model.vo.UserVO;
 import com.example.rednote.service.UserService;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.crypto.digest.BCrypt;
 import lombok.AllArgsConstructor;
 
@@ -63,5 +65,16 @@ public class UserServiceImpl implements UserService {
         } else {
             throw new LoginFailedException("用户名或密码错误");
         }
+    }
+
+    @Override
+    public UserVO getCurrentUser() {
+        String userIdStr = ThreadLocalUtils.get("userId");
+        Integer currentUserId = Integer.parseInt(userIdStr);
+        UserPO userPO = userMapper.selectById(currentUserId);
+        UserVO userVO = new UserVO();
+        BeanUtil.copyProperties(userPO, userVO);
+        userVO.setAvatar(minioUtils.getPublicUrl(userVO.getAvatar()));
+        return userVO;
     }
 }

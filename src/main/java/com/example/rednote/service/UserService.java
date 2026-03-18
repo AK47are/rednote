@@ -11,4 +11,6 @@ public interface UserService {
     Integer register(UserDTO userDTO);
 
     String login(LoginDTO loginDTO);
+
+    UserVO getCurrentUser();
 }
