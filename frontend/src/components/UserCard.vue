@@ -43,7 +43,7 @@
 
 <script>
 import { ElMessage } from 'element-plus'
-import { getByIdApi, getDetailByIdApi } from '@/api/user'
+import { getByIdApi, getDetailByIdApi, getCurrApi } from '@/api/user'
 
 export default {
   name: 'UserCard',
@@ -55,6 +55,7 @@ export default {
   },
   data() {
     return {
+      currUserId: null,
       user: {
         userId: null,
         username: '',
@@ -66,6 +67,16 @@ export default {
         likeReceiveCount: 0,
       },
     }
+  },
+  created() {
+    getCurrApi()
+      .then((res) => {
+        this.currUserId = res.data.userId
+        console.log('当前登录用户:', this.currUserId)
+      })
+      .catch((err) => {
+        console.error('获取当前用户失败', err)
+      })
   },
   watch: {
     userId: {
