@@ -14,7 +14,6 @@ import lombok.Data;
 public class UserDetailsPO {
 
     @TableId(type = IdType.AUTO)
-    private Integer userDetailsId;
     private Integer userId;
     private String phone;
     private String email;
