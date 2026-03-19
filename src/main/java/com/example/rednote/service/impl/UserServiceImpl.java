@@ -46,10 +46,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void register(UserDTO userDTO) {
+    public void register(UserAuthDTO userAuthDTO) {
         // 检查 username 是否已经存在
         QueryWrapper<UserPO> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("username", userDTO.getUsername());
+        queryWrapper.eq("username", userAuthDTO.getUsername());
 
         if (Objects.nonNull(userMapper.selectOne(queryWrapper))) {
             throw new RegisterFailedException("用户名已经存在");
@@ -57,8 +57,8 @@ public class UserServiceImpl implements UserService {
 
         // 插入到 user 表
         UserPO userPO = new UserPO();
-        userPO.setUsername(userDTO.getUsername());
-        userPO.setPassword(BCrypt.hashpw(userDTO.getPassword()));
+        userPO.setUsername(userAuthDTO.getUsername());
+        userPO.setPassword(BCrypt.hashpw(userAuthDTO.getPassword()));
         userMapper.insert(userPO);
 
         // 插入到 user_details 表

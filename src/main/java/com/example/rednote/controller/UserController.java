@@ -35,8 +35,8 @@ public class UserController {
 
     @PostMapping("/register")
     @Operation(summary = "用户注册", description = "创建新用户账户")
-    public Result<?> register(@RequestBody UserDTO userDto) {
-        userService.register(userDto);
+    public Result<?> register(@RequestBody UserAuthDTO userAuthDTO) {
+        userService.register(userAuthDTO);
         return Result.success();
     }
 
