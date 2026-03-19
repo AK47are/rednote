@@ -36,11 +36,8 @@ public class UserController {
     @PostMapping("/register")
     @Operation(summary = "用户注册", description = "创建新用户账户")
     public Result<?> register(@RequestBody UserDTO userDto) {
-        if (userService.register(userDto) == 1) {
-            return Result.success();
-        } else {
-            return Result.fail("注册失败");
-        }
+        userService.register(userDto);
+        return Result.success();
     }
 
     @PostMapping("/login")

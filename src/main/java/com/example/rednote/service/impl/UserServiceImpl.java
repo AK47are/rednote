@@ -39,20 +39,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Integer register(UserDTO userDTO) {
-        userDTO.setUserId(null);
-        UserPO userPO = new UserPO();
-
+    public void register(UserDTO userDTO) {
         // 检查 username 是否已经存在
         QueryWrapper<UserPO> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username", userDTO.getUsername());
-        if (Objects.nonNull(userMapper.selectOne(queryWrapper)))
+
+        if (Objects.nonNull(userMapper.selectOne(queryWrapper))) {
             throw new RegisterFailedException("用户名已经存在");
-        else {
-            userPO.setPassword(BCrypt.hashpw(userDTO.getPassword()));
-            userPO.setUsername(userDTO.getUsername());
-            return userMapper.insert(userPO);
         }
+
+        // 插入到 user 表
+        UserPO userPO = new UserPO();
+        userPO.setUsername(userDTO.getUsername());
+        userPO.setPassword(BCrypt.hashpw(userDTO.getPassword()));
+        userMapper.insert(userPO);
     }
 
     @Override

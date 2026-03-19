@@ -8,7 +8,7 @@ public interface UserService {
 
     UserVO getById(Integer userId);
 
-    Integer register(UserDTO userDTO);
+    void register(UserDTO userDTO);
 
     String login(LoginDTO loginDTO);
 
