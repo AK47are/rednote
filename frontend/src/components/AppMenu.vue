@@ -1,5 +1,5 @@
 <template>
-  <el-menu default-active="$route.path" router class="el-menu-vertical-demo menu-container">
+  <el-menu :default-active="$route.path" router class="el-menu-vertical-demo menu-container">
     <div class="menu-top">
       <el-menu-item index="/explore">
         <el-icon><HomeFilled /></el-icon>
