@@ -10,6 +10,6 @@ public class CommentVO {
     private Integer commentId;
     private Integer userId;
     private String content;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime createTime;
 }
