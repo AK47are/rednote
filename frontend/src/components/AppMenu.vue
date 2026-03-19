@@ -13,7 +13,7 @@
         <el-icon><Message /></el-icon>
         <span>通知</span>
       </el-menu-item>
-      <el-menu-item index="/profile">
+      <el-menu-item :index="'/profiles/' + userId">
         <el-icon><User /></el-icon>
         <span>我</span>
       </el-menu-item>
@@ -37,7 +37,16 @@
   </el-menu>
 </template>
 
-<script setup></script>
+<script>
+import { mapState } from 'pinia'
+import { useUserStore } from '@/stores/user'
+
+export default {
+  computed: {
+    ...mapState(useUserStore, ['userId']),
+  },
+}
+</script>
 
 <style scoped>
 .menu-container {
