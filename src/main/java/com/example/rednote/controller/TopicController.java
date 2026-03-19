@@ -18,10 +18,11 @@ import java.util.List;
 @Tag(name = "主题相关接口")
 public class TopicController {
     private final TopicService topicService;
+
     @Operation(summary = "获取所有主题")
     @GetMapping("/list")
-    public Result<?> list(){
-        List<TopicVO> topicVOS =  topicService.list();
+    public Result<?> list() {
+        List<TopicVO> topicVOS = topicService.list();
         return Result.success(topicVOS);
     }
 }

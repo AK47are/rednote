@@ -13,7 +13,6 @@ import com.example.rednote.common.utils.ThreadLocalUtils;
 import com.example.rednote.mapper.UserDetailsMapper;
 import com.example.rednote.mapper.UserMapper;
 import com.example.rednote.model.dto.UserAuthDTO;
-import com.example.rednote.model.dto.UserDTO;
 import com.example.rednote.model.exception.LoginFailedException;
 import com.example.rednote.model.exception.RegisterFailedException;
 import com.example.rednote.model.po.UserDetailsPO;

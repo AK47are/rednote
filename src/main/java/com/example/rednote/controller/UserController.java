@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.rednote.common.response.Result;
 import com.example.rednote.model.dto.UserAuthDTO;
-import com.example.rednote.model.dto.UserDTO;
 import com.example.rednote.model.vo.UserVO;
 import com.example.rednote.service.UserService;
 

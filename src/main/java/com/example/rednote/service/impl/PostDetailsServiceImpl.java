@@ -7,8 +7,8 @@ import com.example.rednote.service.PostDetailsService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-
 @Service
 @AllArgsConstructor
-public class PostDetailsServiceImpl extends ServiceImpl<PostDetailsMapper, PostDetailsPO> implements PostDetailsService {
+public class PostDetailsServiceImpl extends ServiceImpl<PostDetailsMapper, PostDetailsPO>
+        implements PostDetailsService {
 }

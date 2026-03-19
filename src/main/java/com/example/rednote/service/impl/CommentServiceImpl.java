@@ -15,10 +15,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
 @AllArgsConstructor
-public class CommentServiceImpl  implements CommentService {
+public class CommentServiceImpl implements CommentService {
 
     private final CommentMapper commentMapper;
     private final PostMapper postMapper;
@@ -44,6 +43,7 @@ public class CommentServiceImpl  implements CommentService {
         commentPO.setUserId(userId);
         commentMapper.insert(commentPO);
     }
+
     @Override
     public void removeById(Integer id) {
         commentMapper.deleteById(id);
