@@ -19,10 +19,10 @@
       </el-menu-item>
     </div>
     <div class="menu-bottom">
-      <el-menu-item>
+      <el-menu-item index="settings">
         <el-dropdown trigger="click" placement="top-start">
-          <span
-            ><el-icon><Setting /></el-icon> 设置
+          <span>
+            <el-icon><Setting /></el-icon> 设置
           </span>
           <template #dropdown>
             <el-dropdown-menu>
