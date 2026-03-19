@@ -61,8 +61,8 @@
 import { ElMessage } from 'element-plus'
 import { getByIdApi, getDetailByIdApi } from '@/api/user'
 import { toggleFollowApi, isFollowApi } from '@/api/follow'
+import { mapState } from 'pinia'
 import { useUserStore } from '@/stores/user'
-import { storeToRefs } from 'pinia'
 
 export default {
   name: 'UserCard',
@@ -72,10 +72,10 @@ export default {
       required: true,
     },
   },
-  setup() {
-    const userStore = useUserStore()
-    const { userId: currUserId } = storeToRefs(userStore)
-    return { currUserId }
+  computed: {
+    ...mapState(useUserStore, {
+      currUserId: 'userId',
+    }),
   },
   data() {
     return {
@@ -106,7 +106,11 @@ export default {
   methods: {
     async fetchUser(id) {
       try {
-        const [userRes, detailsRes] = await Promise.all([getByIdApi(id), getDetailByIdApi(id)])
+        const [userRes, detailsRes, followRes] = await Promise.all([
+          getByIdApi(id),
+          getDetailByIdApi(id),
+          isFollowApi(id),
+        ])
 
         this.user = {
           userId: userRes.data.userId,
@@ -119,8 +123,7 @@ export default {
           likeReceiveCount: detailsRes.data.likeReceiveCount,
         }
 
-        const res = await isFollowApi(id)
-        this.isFollowed = res.data
+        this.isFollowed = followRes.data
       } catch (err) {
         ElMessage.error(err.message || '获取用户信息失败')
       }
