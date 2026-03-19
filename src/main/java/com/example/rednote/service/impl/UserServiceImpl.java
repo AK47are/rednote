@@ -12,7 +12,7 @@ import com.example.rednote.common.utils.MinioUtils;
 import com.example.rednote.common.utils.ThreadLocalUtils;
 import com.example.rednote.mapper.UserDetailsMapper;
 import com.example.rednote.mapper.UserMapper;
-import com.example.rednote.model.dto.LoginDTO;
+import com.example.rednote.model.dto.UserAuthDTO;
 import com.example.rednote.model.dto.UserDTO;
 import com.example.rednote.model.exception.LoginFailedException;
 import com.example.rednote.model.exception.RegisterFailedException;
@@ -69,11 +69,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String login(LoginDTO loginDTO) {
+    public String login(UserAuthDTO userAuthDTO) {
         QueryWrapper<UserPO> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("username", loginDTO.getUsername());
+        queryWrapper.eq("username", userAuthDTO.getUsername());
         UserPO userPO = userMapper.selectOne(queryWrapper);
-        if (Objects.nonNull(userPO) && BCrypt.checkpw(loginDTO.getPassword(), userPO.getPassword())) {
+        if (Objects.nonNull(userPO) && BCrypt.checkpw(userAuthDTO.getPassword(), userPO.getPassword())) {
             return jwtUtils.generateToken(Integer.toString(userPO.getUserId()), userPO.getUsername());
         } else {
             throw new LoginFailedException("用户名或密码错误");

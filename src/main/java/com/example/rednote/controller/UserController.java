@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.rednote.common.response.Result;
-import com.example.rednote.model.dto.LoginDTO;
+import com.example.rednote.model.dto.UserAuthDTO;
 import com.example.rednote.model.dto.UserDTO;
 import com.example.rednote.model.vo.UserVO;
 import com.example.rednote.service.UserService;
@@ -42,8 +42,8 @@ public class UserController {
 
     @PostMapping("/login")
     @Operation(summary = "用户登录", description = "登录用户账号")
-    public Result<String> login(@RequestBody LoginDTO loginDTO) {
-        return Result.success(userService.login(loginDTO));
+    public Result<String> login(@RequestBody UserAuthDTO userAuthDTO) {
+        return Result.success(userService.login(userAuthDTO));
     }
 
     @GetMapping("/current")

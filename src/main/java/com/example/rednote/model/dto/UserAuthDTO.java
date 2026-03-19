@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import lombok.Data;
 
 @Data
-public class LoginDTO {
+public class UserAuthDTO {
 
     @Schema(description = "用户名", requiredMode = RequiredMode.REQUIRED)
     String username;
