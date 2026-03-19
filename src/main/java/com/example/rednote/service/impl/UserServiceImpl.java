@@ -4,16 +4,19 @@ import java.util.Objects;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.rednote.common.utils.JwtUtils;
 import com.example.rednote.common.utils.MinioUtils;
 import com.example.rednote.common.utils.ThreadLocalUtils;
+import com.example.rednote.mapper.UserDetailsMapper;
 import com.example.rednote.mapper.UserMapper;
 import com.example.rednote.model.dto.LoginDTO;
 import com.example.rednote.model.dto.UserDTO;
 import com.example.rednote.model.exception.LoginFailedException;
 import com.example.rednote.model.exception.RegisterFailedException;
+import com.example.rednote.model.po.UserDetailsPO;
 import com.example.rednote.model.po.UserPO;
 import com.example.rednote.model.vo.UserVO;
 import com.example.rednote.service.UserService;
@@ -21,12 +24,15 @@ import com.example.rednote.service.UserService;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.crypto.digest.BCrypt;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
+    private final UserDetailsMapper userDetailsMapper;
     private final JwtUtils jwtUtils;
     private final MinioUtils minioUtils;
 
@@ -39,6 +45,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void register(UserDTO userDTO) {
         // 检查 username 是否已经存在
         QueryWrapper<UserPO> queryWrapper = new QueryWrapper<>();
@@ -53,6 +60,12 @@ public class UserServiceImpl implements UserService {
         userPO.setUsername(userDTO.getUsername());
         userPO.setPassword(BCrypt.hashpw(userDTO.getPassword()));
         userMapper.insert(userPO);
+
+        // 插入到 user_details 表
+        log.debug("获得 userId: {}", userPO.getUserId());
+        UserDetailsPO details = new UserDetailsPO();
+        details.setUserId(userPO.getUserId());
+        userDetailsMapper.insert(details);
     }
 
     @Override
