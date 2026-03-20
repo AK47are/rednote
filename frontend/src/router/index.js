@@ -14,6 +14,11 @@ const router = createRouter({
           name: 'profiles',
           component: () => import('@/views/ProfileView.vue'),
         },
+        {
+          path: '/settings',
+          name: 'settings',
+          component: () => import('@/views/UserSettingView.vue'),
+        },
       ],
     },
     {
