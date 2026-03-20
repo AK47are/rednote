@@ -63,7 +63,7 @@ export default {
           this.$router.push('/login')
         }
       } catch (e) {
-        ElMessage.error(e.response?.data?.msg || '注册失败，请稍后重试')
+        console.log(`注册失败：${e}`)
       }
     },
   },

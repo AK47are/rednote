@@ -124,8 +124,8 @@ export default {
         }
 
         this.isFollowed = followRes.data
-      } catch (err) {
-        ElMessage.error(err.message || '获取用户信息失败')
+      } catch (e) {
+        console.log(`尝试获取用户信息失败：${e}`)
       }
     },
     async handleToggleFollow() {
@@ -134,8 +134,8 @@ export default {
         await toggleFollowApi(this.userId)
         this.isFollowed = !this.isFollowed
         this.fetchUser(this.userId)
-      } catch (err) {
-        ElMessage.error(err.message || '操作失败')
+      } catch (e) {
+        console.log(`关注后用户数据更新失败：${e}`)
       } finally {
         this.followLoading = false
       }

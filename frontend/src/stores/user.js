@@ -14,7 +14,7 @@ export const useUserStore = defineStore('user', {
       try {
         const res = await getCurrApi()
         this.userId = res.data.userId
-      } catch (err) {
+      } catch (e) {
         this.userId = null
         localStorage.removeItem('token')
       } finally {

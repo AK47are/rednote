@@ -73,7 +73,7 @@ export default {
           ElMessage.success('登录成功')
         }
       } catch (e) {
-        ElMessage.error(e.response?.data?.msg || '登录失败，请稍后重试')
+        console.log(`登录失败：${e}`)
       }
     },
   },
