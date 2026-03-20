@@ -18,4 +18,11 @@ public class LikeController {
     public Result<Boolean> isLike(@PathVariable Integer postId){
         return Result.success(likeService.isLike(postId));
     }
+
+    @Operation(summary = "点赞/取消点赞",description = "根据postId点赞/取消点赞")
+    @PostMapping("/{postId}")
+    public Result<Boolean> toogleLiked(@PathVariable Integer postId){
+        return Result.success(likeService.toogleLike(postId));
+    }
+
 }
