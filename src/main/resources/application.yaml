@@ -21,6 +21,12 @@ mybatis:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
+mybatis-plus:
+  global-config:
+    db-config:
+      insert-strategy: NOT_EMPTY
+      update-strategy: NOT_EMPTY
+
 logging:
   level:
     root: warn
