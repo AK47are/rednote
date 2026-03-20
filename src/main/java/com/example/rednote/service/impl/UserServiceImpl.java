@@ -13,6 +13,7 @@ import com.example.rednote.common.utils.ThreadLocalUtils;
 import com.example.rednote.mapper.UserDetailsMapper;
 import com.example.rednote.mapper.UserMapper;
 import com.example.rednote.model.dto.UserAuthDTO;
+import com.example.rednote.model.dto.UserUpdateDTO;
 import com.example.rednote.model.exception.LoginFailedException;
 import com.example.rednote.model.exception.RegisterFailedException;
 import com.example.rednote.model.po.UserDetailsPO;
@@ -21,7 +22,9 @@ import com.example.rednote.model.vo.UserVO;
 import com.example.rednote.service.UserService;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.BCrypt;
+import io.minio.errors.MinioException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -88,5 +91,24 @@ public class UserServiceImpl implements UserService {
         BeanUtil.copyProperties(userPO, userVO);
         userVO.setAvatar(minioUtils.getPublicUrl(userVO.getAvatar()));
         return userVO;
+    }
+
+    @Override
+    @Transactional
+    public void updateUser(UserUpdateDTO userUpdateDTO) {
+        userUpdateDTO.setAvatar(minioUtils.getObjectName(userUpdateDTO.getAvatar()));
+        Integer userId = Integer.parseInt(ThreadLocalUtils.get("userId"));
+
+        // user 表更新
+        UserPO userPO = new UserPO();
+        userPO.setUserId(userId);
+        BeanUtil.copyProperties(userUpdateDTO, userPO);
+        userMapper.updateById(userPO);
+
+        // user_details 表更新
+        UserDetailsPO userDetailsPO = new UserDetailsPO();
+        userDetailsPO.setUserId(userId);
+        BeanUtil.copyProperties(userUpdateDTO, userDetailsPO);
+        userDetailsMapper.updateById(userDetailsPO);
     }
 }

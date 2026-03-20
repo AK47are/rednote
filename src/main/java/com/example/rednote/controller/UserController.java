@@ -3,12 +3,14 @@ package com.example.rednote.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.rednote.common.response.Result;
 import com.example.rednote.model.dto.UserAuthDTO;
+import com.example.rednote.model.dto.UserUpdateDTO;
 import com.example.rednote.model.vo.UserVO;
 import com.example.rednote.service.UserService;
 
@@ -50,4 +52,12 @@ public class UserController {
     public Result<UserVO> getCurrentUser() {
         return Result.success(userService.getCurrentUser());
     }
+
+    @PutMapping("/profile")
+    @Operation(summary = "修改当前用户资料", description = "修改当前用户的信息，支持基本和详细信息")
+    public Result<?> updateUser(@RequestBody UserUpdateDTO userUpdateDTO) {
+        userService.updateUser(userUpdateDTO);
+        return Result.success();
+    }
+
 }
