@@ -19,19 +19,9 @@
       </el-menu-item>
     </div>
     <div class="menu-bottom">
-      <el-menu-item index="settings">
-        <el-dropdown trigger="click" placement="top-start">
-          <span>
-            <el-icon><Setting /></el-icon> 设置
-          </span>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item>The Action 1st</el-dropdown-item>
-              <el-dropdown-item>The Action 2nd</el-dropdown-item>
-              <el-dropdown-item>The Action 3rd</el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
+      <el-menu-item index="/settings">
+        <el-icon><Setting /></el-icon>
+        <span>设置</span>
       </el-menu-item>
     </div>
   </el-menu>
