@@ -1,5 +1,6 @@
 package com.example.rednote.service;
 
-public interface LikeService{
+public interface LikeService {
 
+    Boolean isLike(Integer postId);
 }
