@@ -25,7 +25,7 @@ request.interceptors.response.use(
       ElMessage.error('登录失效, 请重新登录')
       router.push('/login')
     } else {
-      ElMessage.error('接口访问异常')
+      ElMessage.error(error.response.data?.msg || '接口访问异常')
     }
     return Promise.reject(error)
   },
