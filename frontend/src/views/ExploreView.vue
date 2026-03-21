@@ -21,6 +21,12 @@
       />
     </el-row>
 
+    <post-detail-card
+      v-model:visible="detailVisible"
+      :post="selectedPost"
+      :show-follow-btn="currUserId !== selectedPost.userId"
+    />
+
     </div>
 </template>
 
@@ -28,19 +34,28 @@
 import { getPostListApi } from '@/api/post'
 import { getTopicListApi } from '@/api/topic'
 import PostCard from '@/components/PostCard.vue'
+import PostDetailCard from '@/components/PostDetailCard.vue'
 import '@/assets/baseHome.css'
+import { mapState } from 'pinia'
+import { useUserStore } from '@/stores/user'
 
 export default {
   components: {
     PostCard,
+    PostDetailCard,
+  },
+  computed: {
+    ...mapState(useUserStore, {
+      currUserId: 'userId',
+    }),
   },
   data() {
     return {
       postList: [],
-      
+      selectedPost: {},
+      detailVisible: false,
       topicList: [],
       topicId: 0,
-
     }
   },  
   methods: {
@@ -60,7 +75,7 @@ export default {
     },
     showDetail(post) {
       this.selectedPost = post
-
+      this.detailVisible = true
     }
   },
   mounted() {
