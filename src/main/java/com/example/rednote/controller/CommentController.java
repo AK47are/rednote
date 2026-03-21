@@ -2,7 +2,7 @@ package com.example.rednote.controller;
 
 import com.example.rednote.common.response.Result;
 import com.example.rednote.model.dto.CommentDTO;
-import com.example.rednote.model.vo.CommentVO;
+import com.example.rednote.model.vo.CommentWithUserVO;
 import com.example.rednote.service.CommentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,8 +22,8 @@ public class CommentController {
     @Operation(summary = "查询帖子评论", description = "根据帖子ID查询该帖子下的所有评论")
     @GetMapping("/list/{postId}")
     public Result<?> listByPostId(@PathVariable Integer postId) {
-        List<CommentVO> commentVOS = commentService.listByPostId(postId);
-        return Result.success(commentVOS);
+        List<CommentWithUserVO> commentWithUserVOS = commentService.listByPostId(postId);
+        return Result.success(commentWithUserVOS);
     }
 
     @Operation(summary = "添加评论", description = "用户对帖子进行评论")
