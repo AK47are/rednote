@@ -30,7 +30,8 @@
 </template>
 
 <script>
-import { getPostListApi, getTopicListApi } from '@/api/post'
+import { getPostListApi } from '@/api/post'
+import { getTopicListApi } from '@/api/topic'
 import { getCurrentUserInfo } from '@/api/user'
 import PostCard from '@/components/PostCard.vue'
 import PostDetailModal from '@/components/PostDetailModal.vue'
