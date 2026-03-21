@@ -17,6 +17,7 @@ public class PostPO {
     private Integer userId;
     private String title;
     private String content;
+    private String coverImage;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime createTime;
 }
