@@ -10,6 +10,11 @@ const router = createRouter({
       component: Layout,
       children: [
         {
+          path: '/explore',
+          name: 'explore',
+          component: () => import('@/views/ExploreView.vue'),
+        },
+        {
           path: '/profiles/:userId(\\d+)',
           name: 'profiles',
           component: () => import('@/views/ProfileView.vue'),
