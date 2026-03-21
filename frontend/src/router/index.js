@@ -15,6 +15,11 @@ const router = createRouter({
           component: () => import('@/views/ExploreView.vue'),
         },
         {
+          path: '/blogger',
+          name: 'blogger',
+          component: () => import('@/views/BloggerView.vue'),
+        },
+        {
           path: '/profiles/:userId(\\d+)',
           name: 'profiles',
           component: () => import('@/views/ProfileView.vue'),
