@@ -17,4 +17,10 @@ public class PostDTO {
     private String title;
     @Schema(description = "帖子内容", requiredMode = RequiredMode.REQUIRED)
     private String content;
+    @Schema(description = "帖子封面url", requiredMode = RequiredMode.REQUIRED)
+    private String coverImage;
+    @Schema(description = "帖子标签", requiredMode = RequiredMode.NOT_REQUIRED)
+    private String[] topicIds;
+    @Schema(description = "文件url", requiredMode = RequiredMode.REQUIRED)
+    private String[] fileUrls;
 }
