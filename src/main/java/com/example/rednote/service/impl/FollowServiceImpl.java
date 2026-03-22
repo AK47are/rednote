@@ -1,7 +1,9 @@
 package com.example.rednote.service.impl;
 
+import java.util.List;
 import java.util.Objects;
-
+import com.example.rednote.common.utils.MinioUtils;
+import com.example.rednote.model.vo.UserVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +24,7 @@ public class FollowServiceImpl implements FollowService {
 
     private final FollowMapper followMapper;
     private final UserDetailsMapper userDetailsMapper;
+    private final MinioUtils minioUtils;
 
     @Override
     @Transactional
@@ -58,4 +61,13 @@ public class FollowServiceImpl implements FollowService {
         return Objects.nonNull(followMapper.selectOne(wrapper));
     }
 
+    @Override
+    public List<UserVO> listFollowing() {
+        Integer currId = Integer.parseInt(ThreadLocalUtils.get("userId"));
+        List<UserVO> userVOS = followMapper.selectByUserId(currId);
+        userVOS.forEach(userVO -> {
+            userVO.setAvatar(minioUtils.getPublicUrl(userVO.getAvatar()));
+        });
+        return userVOS;
+    }
 }
