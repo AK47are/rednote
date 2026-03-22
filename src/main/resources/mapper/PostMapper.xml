@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.rednote.mapper.PostMapper">
+
+    <!-- 定义结果映射：将查询结果映射到 PostWithUserVO 对象 -->
+    <resultMap id="PostWithUserVOMap" type="com.example.rednote.model.vo.PostWithUserVO">
+        <!-- 帖子字段 -->
+        <id property="postId" column="post_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="coverImage" column="cover_image"/>
+        <result property="createTime" column="create_time"/>
+        <!-- 用户字段（来自 user 表） -->
+        <result property="userName" column="username"/>
+        <result property="userAvatar" column="avatar"/>
+    </resultMap>
+
+    <!-- 自定义连接查询，支持 MyBatis-Plus 条件构造器 -->
+    <select id="selectPostWithUser" resultMap="PostWithUserVOMap">
+        SELECT
+        p.post_id,
+        p.user_id,
+        p.title,
+        p.content,
+        p.cover_image,
+        p.create_time,
+        u.username,
+        u.avatar
+        FROM post p
+        LEFT JOIN user u ON p.user_id = u.user_id
+        WHERE p.user_id = #{userId}
+        ORDER BY p.create_time DESC
+    </select>
+
+</mapper>
