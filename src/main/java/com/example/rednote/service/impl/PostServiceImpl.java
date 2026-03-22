@@ -48,4 +48,14 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, PostPO> implements 
         }).toList();
         return postWithUserVOs;
     }
+
+    @Override
+    public List<PostWithUserVO> listWithUserInfoByUserId(Integer userId) {
+        List<PostWithUserVO> postWithUserVOS = postMapper.selectPostWithUser(userId);
+        postWithUserVOS.forEach(postWithUserVO -> {
+            postWithUserVO.setUserAvatar(minioUtils.getPublicUrl(postWithUserVO.getUserAvatar()));
+            postWithUserVO.setCoverImage(minioUtils.getPublicUrl(postWithUserVO.getCoverImage()));
+        });
+        return postWithUserVOS;
+    }
 }
