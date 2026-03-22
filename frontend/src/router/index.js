@@ -15,6 +15,11 @@ const router = createRouter({
           component: () => import('@/views/ExploreView.vue'),
         },
         {
+          path: '/following',
+          name: 'following',
+          component: () => import('@/views/FollowingView.vue'),
+        },
+        {
           path: '/profiles/:userId(\\d+)',
           name: 'profiles',
           component: () => import('@/views/ProfileView.vue'),
