@@ -5,6 +5,10 @@
         <el-icon><HomeFilled /></el-icon>
         <span>发现</span>
       </el-menu-item>
+      <el-menu-item index="/following">
+        <el-icon><UserFilled /></el-icon>
+        <span>关注列表</span>
+      </el-menu-item>
       <el-menu-item index="3">
         <el-icon><CirclePlus /></el-icon>
         <span>发布</span>
