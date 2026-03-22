@@ -1,19 +1,20 @@
 package com.example.rednote.service.impl;
 
+import cn.hutool.core.io.FileUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.rednote.common.utils.MinioUtils;
-import com.example.rednote.mapper.PostTopicMapper;
-import com.example.rednote.mapper.UserMapper;
-import com.example.rednote.model.po.PostTopicPO;
-import com.example.rednote.model.po.UserPO;
+import com.example.rednote.common.utils.ThreadLocalUtils;
+import com.example.rednote.mapper.*;
+import com.example.rednote.model.dto.PostDTO;
+import com.example.rednote.model.po.*;
 import com.example.rednote.model.vo.PostWithUserVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.rednote.mapper.PostMapper;
-import com.example.rednote.model.po.PostPO;
 import com.example.rednote.service.PostService;
 import lombok.AllArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service
@@ -24,6 +25,8 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, PostPO> implements 
     private final UserMapper userMapper;
     private final PostMapper postMapper;
     private final MinioUtils minioUtils;
+    private final PostDetailsMapper postDetailsMapper;
+    private final PostImageMapper postImageMapper;
 
     @Override
     public List<PostWithUserVO> listWithUserInfo(Integer topicId) {
@@ -57,5 +60,41 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, PostPO> implements 
             postWithUserVO.setCoverImage(minioUtils.getPublicUrl(postWithUserVO.getCoverImage()));
         });
         return postWithUserVOS;
+    }
+
+    @Transactional
+    @Override
+    public void addPost(PostDTO postDTO){
+        PostPO postPO = new PostPO();
+        postDTO.setUserId(ThreadLocalUtils.get("userId"));
+        BeanUtils.copyProperties(postDTO, postPO);
+        postPO.setCoverImage(minioUtils.getObjectName(postPO.getCoverImage()));
+        postMapper.insert(postPO);
+        Integer postId = postPO.getPostId();
+        PostDetailsPO postDetailsPO = new PostDetailsPO();
+        postDetailsPO.setPostId(postId);
+        String videoRegex = "^(?:mp4|avi|mov|wmv)$";
+        if(postDTO.getFileUrls() == null){
+            postDetailsPO.setType(3);
+        }else if(postDTO.getFileUrls().length == 1 && videoRegex.matches(postDTO.getFileUrls()[0])){
+            postDetailsPO.setType(2);
+        }else{
+            postDetailsPO.setType(1);
+        }
+        postDetailsMapper.insert(postDetailsPO);
+        // NOTE: N+1 查询问题，数据量一大必崩
+        for(String fileUrl : postDTO.getFileUrls()){
+            PostImagePO postImagePO = new PostImagePO();
+            postImagePO.setPostId(postId);
+            postImagePO.setUrl(minioUtils.getObjectName(fileUrl));
+            postImageMapper.insert(postImagePO);
+        }
+        // NOTE: N+1 查询问题，数据量一大必崩
+        for (String topicId : postDTO.getTopicIds()){
+            PostTopicPO postTopicPO = new PostTopicPO();
+            postTopicPO.setPostId(postId);
+            postTopicPO.setTopicId(Integer.parseInt(topicId));
+            postTopicMapper.insert(postTopicPO);
+        }
     }
 }
