@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.rednote.mapper.FollowMapper">
+
+
+    <select id="selectByUserId" resultType="com.example.rednote.model.vo.UserVO">
+        select u.user_id,u.username,u.avatar
+        from follow f
+        left join user u on u.user_id = f.following_id
+        where f.follower_id = #{userId}
+    </select>
+</mapper>
