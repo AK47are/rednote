@@ -11,6 +11,7 @@ import io.jsonwebtoken.io.IOException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @AllArgsConstructor
@@ -38,9 +39,8 @@ public class JwtInterceptor implements HandlerInterceptor {
         try {
             Claims claims = jwtUtils.parseToken(token);
 
-            ThreadLocalUtils.set("userId", claims.getSubject());
+            ThreadLocalUtils.set("userId", Integer.parseInt(claims.getSubject()));
             ThreadLocalUtils.set("username", claims.get("username"));
-
             return true;
         } catch (Exception e) {
             sendError(response, "令牌解析失败");

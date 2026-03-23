@@ -46,7 +46,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void insert(CommentDTO commentDTO) {
-        Integer userId = Integer.parseInt(ThreadLocalUtils.get("userId"));
+        Integer userId = ThreadLocalUtils.get("userId");
         if (postMapper.selectById(commentDTO.getPostId()) == null) {
             throw new PostQueryFailedExceptioin("帖子不存在");
         }
