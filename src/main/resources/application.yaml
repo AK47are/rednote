@@ -1,7 +1,10 @@
 spring:
   application:
     name: rednote
-
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
   sql:
     init:
       mode: always
