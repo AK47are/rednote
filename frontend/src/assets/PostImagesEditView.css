@@ -1,0 +1,214 @@
+.upload-image-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #f8f8f8;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.upload-image-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+/* 初始上传 */
+.initial-upload .upload-header {
+  margin-bottom: 24px;
+}
+.upload-header h3 {
+  font-size: 20px;
+  margin: 0 0 8px 0;
+}
+.upload-header p {
+  color: #999;
+  margin: 0;
+}
+.upload-box {
+  height: 220px;
+  border: 2px dashed #eee;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+}
+.upload-box i {
+  font-size: 48px;
+  color: #409eff;
+  margin-bottom: 12px;
+}
+
+/* 发布编辑页 */
+.top-bar {
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 24px;
+}
+.upload-progress {
+  max-width: 600px;
+  margin: 8px 0;
+}
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #666;
+}
+.cancel-upload {
+  color: #f56c6c !important;
+}
+
+.main-content {
+  display: flex;
+  gap: 40px;
+}
+.edit-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* 横向图片列表（效果图核心） */
+.image-slider-section {
+  width: 100%;
+}
+.image-slider-container {
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+.image-slider {
+  display: flex;
+  gap: 12px;
+  min-width: 100%;
+}
+.image-item {
+  width: 160px;
+  height: 160px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  background: #f5f5f5;
+  transition: all 0.3s ease;
+}
+.image-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.image-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.image-item .el-icon-close {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 20px;
+  height: 20px;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  z-index: 3;
+}
+
+/* 添加按钮 */
+.add-btn {
+  width: 160px;
+  height: 160px;
+  border-radius: 12px;
+  border: 2px dashed #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.add-btn i {
+  font-size: 24px;
+  color: #999;
+}
+
+/* 表单 */
+.content-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.content-input {
+  border-radius: 8px;
+  resize: none;
+  margin-top: 10px;
+}
+
+.content-form :deep(.el-input__wrapper) {
+  margin-bottom: 10px;
+}
+.add-tag-btn {
+  font-size: 12px;
+  color: #409eff;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+/* 预览 */
+.preview-area {
+  width: 300px;
+  flex-shrink: 0;
+}
+.phone-preview {
+  border: 2px solid #eee;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #fff;
+}
+.phone-header {
+  padding: 12px;
+  background: #f5f5f5;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+.phone-body {
+  padding: 16px;
+}
+.preview-image {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+.preview-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.preview-user img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+.preview-title {
+  font-weight: bold;
+  margin: 0 0 4px 0;
+}
+.preview-desc {
+  color: #666;
+  font-size: 12px;
+  margin: 0;
+}
