@@ -28,7 +28,7 @@ public class LikeServiceImpl implements LikeService {
 
     @Override
     public Boolean isLike(Integer postId) {
-        Integer userId = Integer.parseInt(ThreadLocalUtils.get("userId"));
+        Integer userId = ThreadLocalUtils.get("userId");
 
         LambdaQueryWrapper<LikePO> wrapper = Wrappers.lambdaQuery(LikePO.class)
                 .eq(LikePO::getPostId, postId)
@@ -39,7 +39,7 @@ public class LikeServiceImpl implements LikeService {
     @Override
     @Transactional
     public Boolean toogleLike(Integer postId) {
-        Integer userId = Integer.parseInt(ThreadLocalUtils.get("userId"));
+        Integer userId = ThreadLocalUtils.get("userId");
 
         if (isLike(postId)) {
             LambdaQueryWrapper<LikePO> wrapper = Wrappers.lambdaQuery(LikePO.class)

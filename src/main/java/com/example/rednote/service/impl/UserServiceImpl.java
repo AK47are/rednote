@@ -82,9 +82,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserVO getCurrentUser() {
-        String userIdStr = ThreadLocalUtils.get("userId");
-        Integer currentUserId = Integer.parseInt(userIdStr);
-        UserPO userPO = userMapper.selectById(currentUserId);
+        Integer currId = ThreadLocalUtils.get("userId");
+        UserPO userPO = userMapper.selectById(currId);
         UserVO userVO = new UserVO();
         BeanUtil.copyProperties(userPO, userVO);
         userVO.setAvatar(minioUtils.getPublicUrl(userVO.getAvatar()));
@@ -95,7 +94,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void updateUser(UserUpdateDTO userUpdateDTO) {
         userUpdateDTO.setAvatar(minioUtils.getObjectName(userUpdateDTO.getAvatar()));
-        Integer userId = Integer.parseInt(ThreadLocalUtils.get("userId"));
+        Integer userId = ThreadLocalUtils.get("userId");
 
         // user 表更新
         UserPO userPO = new UserPO();
