@@ -9,7 +9,7 @@
         <el-icon><UserFilled /></el-icon>
         <span>关注列表</span>
       </el-menu-item>
-      <el-menu-item index="3">
+      <el-menu-item index="/publish">
         <el-icon><CirclePlus /></el-icon>
         <span>发布</span>
       </el-menu-item>
