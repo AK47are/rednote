@@ -22,9 +22,7 @@ import com.example.rednote.model.vo.UserVO;
 import com.example.rednote.service.UserService;
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.BCrypt;
-import io.minio.errors.MinioException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

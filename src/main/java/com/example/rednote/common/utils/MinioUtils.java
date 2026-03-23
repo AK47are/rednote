@@ -13,7 +13,6 @@ import cn.hutool.core.net.URLDecoder;
 import cn.hutool.core.util.StrUtil;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
-import io.minio.errors.MinioException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

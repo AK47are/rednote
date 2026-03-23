@@ -35,7 +35,7 @@ public class CommentServiceImpl implements CommentService {
             return List.of();
         }
         List<CommentWithUserVO> commentResultVOS = BeanUtil.copyToList(commentPOS, CommentWithUserVO.class);
-        // @TODO 优化查询，N+1问题
+        // TODO: 优化查询，N+1问题
         commentResultVOS.forEach(commentResultVO -> {
             UserPO userPO = userMapper.selectById(commentResultVO.getUserId());
             commentResultVO.setUserName(userPO.getUsername());

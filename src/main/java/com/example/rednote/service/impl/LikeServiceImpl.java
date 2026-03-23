@@ -1,19 +1,21 @@
 package com.example.rednote.service.impl;
+
+import java.util.Objects;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.rednote.common.utils.ThreadLocalUtils;
 import com.example.rednote.mapper.LikeMapper;
 import com.example.rednote.mapper.PostDetailsMapper;
 import com.example.rednote.mapper.UserDetailsMapper;
 import com.example.rednote.model.po.LikePO;
 import com.example.rednote.service.LikeService;
+
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Objects;
 
 @Service
 @Transactional
@@ -29,8 +31,8 @@ public class LikeServiceImpl implements LikeService {
         Integer userId = Integer.parseInt(ThreadLocalUtils.get("userId"));
 
         LambdaQueryWrapper<LikePO> wrapper = Wrappers.lambdaQuery(LikePO.class)
-                .eq(LikePO::getPostId,postId)
-                .eq(LikePO::getUserId,userId);
+                .eq(LikePO::getPostId, postId)
+                .eq(LikePO::getUserId, userId);
         return Objects.nonNull(likeMapper.selectOne(wrapper));
     }
 
@@ -39,7 +41,7 @@ public class LikeServiceImpl implements LikeService {
     public Boolean toogleLike(Integer postId) {
         Integer userId = Integer.parseInt(ThreadLocalUtils.get("userId"));
 
-        if (isLike(postId)){
+        if (isLike(postId)) {
             LambdaQueryWrapper<LikePO> wrapper = Wrappers.lambdaQuery(LikePO.class)
                     .eq(LikePO::getPostId, postId)
                     .eq(LikePO::getUserId, userId);
@@ -47,7 +49,7 @@ public class LikeServiceImpl implements LikeService {
             postDetailsMapper.updateLikeCount(postId, -1);
             likeMapper.delete(wrapper);
             return false;
-        }else{
+        } else {
             userDetailsMapper.updateLikeReceiveCount(userId, 1);
             postDetailsMapper.updateLikeCount(postId, 1);
             LikePO likePO = new LikePO();
@@ -57,6 +59,5 @@ public class LikeServiceImpl implements LikeService {
             return true;
         }
     }
-
 
 }
