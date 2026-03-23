@@ -41,6 +41,28 @@ const router = createRouter({
       name: 'login',
       component: () => import('@/views/LoginView.vue'),
     },
+    {
+      path: '/publish',
+      name: 'publish',
+      component: () => import('@/views/PublishView.vue'),
+      children:[
+        {
+          path:'/video',
+          name:'publish-video',
+          component: () => import('@/views/PostVideoEditView.vue'),
+        },
+        {
+          path:'/image',
+          name:'publish-image',
+          component: () => import('@/views/PostImagesEditView.vue'),
+        },
+        {
+          path:'/article',
+          name:'publish-article',
+          component: () => import('@/views/PostArticleEditView.vue'),
+        }
+      ]
+    },
   ],
 })
 
